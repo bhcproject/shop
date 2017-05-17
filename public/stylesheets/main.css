@@ -1,0 +1,53 @@
+body {
+    background: #167efb;
+    /*background-image: url(/images/icon@2x.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: 100% 100%;*/
+    font-family: "微软雅黑";
+    /*text-indent: 5em;*/
+}
+
+div.window
+{
+    width: 80%;
+    height: 100%;
+    margin-top:120px;
+    margin-bottom:120px;
+    margin-left: auto;
+    margin-right: auto;
+    /*background: red;*/
+    align-items: center;
+}
+
+div.icon
+{
+    display: inline-block;
+    margin: 10px;
+    padding: 4px;
+    /*border: 2px solid black;*/
+    /*float: left;*/
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+div.icon img
+{
+    display:inline;
+    margin:3px;
+    /*border:2px dotted red;*/
+    width:160px;
+}
+
+div.icon_text
+{
+    /*display:inline;*/
+    text-align:center;
+    font-weight:normal;
+    width: 100%;
+    font-size:18px;
+    margin: 10px 5px;
+    color: white;
+}
