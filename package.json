@@ -12,6 +12,7 @@
     "mongodb": "^2.1.16",
     "morgan": "^1.7.0",
     "object-assign": "4.1.0",
+    "path": "^0.12.7",
     "pug": "^2.0.0-rc.1"
   },
   "engine": {
