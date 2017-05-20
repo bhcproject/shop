@@ -1,9 +1,19 @@
 extends layout
 
 block content
+//-block content
     h1= title
 
-    div(class="icon")
+    label#lab01 hello
+
+    //_input#datepicker
+    script.
+        $('#lab01').innerHTML = 'baohua';
+        $(document).ready(function() {
+            $('#lab01').innerHTML = 'baohua';
+            //_$("#datepicker").kendoDatePicker();
+        });
+    //div(class="icon")
         a(href='/goods')
             img(src='/images/notes_icon@2x.png')
         div(class="icon_text") 商品类目

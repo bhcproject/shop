@@ -1,4 +1,175 @@
-extends layout
+doctype html
+html(lang="zh-cn")
+    head
+        title= '商品类目'
 
-block content
-    h1= title
+        link(rel='stylesheet', href='stylesheets/kedge.css')
+
+        link(rel='stylesheet', href='http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css')
+        link(rel='stylesheet', href='http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.blueopal.min.css')
+
+        //script(src='http://kendo.cdn.telerik.com/2017.2.504/js/jquery.min.js')
+        script(src='https://code.jquery.com/jquery-3.2.1.js')
+        script(src='http://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js')
+
+    body
+        header#page-header
+            span.toggle-nav
+                span
+            div#logo-bar
+                //a(href="http://docs.telerik.com/kendo-ui/introduction")
+                    img.logo(src="http://docs.telerik.com/kendo-ui/images/kendo-ui.png")
+
+                span.logo(style="min-height:100px") 商品类目
+
+        div#page-inner-content
+            div#page-nav
+                div#page-tree
+                script.
+                    var treeDataSource = new kendo.data.DataSource({
+                        data: [
+                            {text:"foo", items:[{text:"bar"}]}
+                        ],
+                        transport: {
+                            read: {url: "/goods/category", dataType: "json", type: "GET"},
+                        },
+                        schema: {
+                             model: {
+                                id: "_id",
+                                fields: {
+                                    _id: {
+                                        type: "string"
+                                    },
+                                    count: {
+                                        type: "number"
+                                    },
+                                    text: {
+                                        type: "string"
+                                    }
+                                }
+                            },
+                            /*parse: function (res) {
+                                var items = res, item;
+                                console.log(items);
+                                for (var i = 0; i < items.length; i++) {
+                                    item = items[i];
+                                    item.text = kendo.format("{0} ({1})", item._id, item.count);
+                                    $('#goods_category_title').text(item.text);
+
+                                }
+                            }*/
+                        }
+                    });
+
+                    $("#page-tree").kendoGrid({
+                        dataSource: treeDataSource,
+                        //dataTextField: "name",
+                        autoBind: false,
+                        columns: [{field: "_id", title: "品类"}, {field:"count", title:"数量"}],
+                        selectable: "single, row",
+                        change: onTreeViewSelect
+                        //select: onTreeViewSelect
+                    });
+                    /*$("#page-tree").kendoTreeView({
+                        dataSource: treeDataSource,
+                        //dataTextField: "_id",
+                        //autoBind: false,
+                        //select: onTreeViewSelect
+                    });*/
+
+                    //treeDataSource.fetch();
+                    treeDataSource.read();
+
+
+                    function onTreeViewSelect(e) {
+                        // this refers to the TreeView object
+                        console.log(this.select());
+                        console.log(this.select()[0]);
+                        var dataItem = this.dataItem(this.select()[0]);
+                        console.log(dataItem);
+                        //var dataItem = this.dataItem(e.node);
+
+                        var category = dataItem._id;
+                        $('#goods_category_title').text(category);
+
+                        dataSource.read({c: category, d: 100});
+
+                    }
+
+
+            div#page-article
+                article
+                    h1#goods_category_title 品类
+
+                div#goods_grid
+                script.
+                    var dataSource = new kendo.data.DataSource({
+
+                        transport: {
+                            create: {url: "/goods/create",  type: "POST"},
+                            read:   {url: "/goods/read",    type: "GET"},
+                            update: {url: "/goods/update",  type: "POST"},
+                            destroy:{url: "/goods/destroy", type: "POST"},
+                        },
+
+                        schema: {
+                            model: {
+                                id: "_id",
+                                fields : {
+                                    _id: {
+                                        editable: false,
+                                        nullable: true
+                                    },
+                                    category: {
+                                        editable: true,
+                                        validation: {
+                                            required: true
+                                        }
+                                    },
+                                    name: {
+                                        validation: {   // set validation rules
+                                            required: true
+                                        }
+                                    },
+                                    price: {
+                                        type: "number",
+                                        defaultValue: 10,
+                                        validation: {
+                                            required: true,
+                                            min: 0.01
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    $("#goods_grid").kendoGrid({
+                        dataSource: dataSource,
+                        autoBind: false,
+                        toolbar: ["create", "save", "cancel"],
+                        editable: true
+                    });
+
+                    //dataSource.read({c:"cloth", d:100});
+
+                footer
+                    p Copyright @ 2017 Phoebe Chang
+
+//extends layout
+
+//block content
+    //h1= title
+
+    //div.panel(style='left:0px;right:0px;min-width:950px;min-height:550px')
+    div.leftwindow(style='background:red')
+        div.panel(style='left:0px;right:0px;min-width:250px;min-height:550px;width:15%;')
+            div.panel(style='height:44px;background:blue;display:block;')
+            div.panel(style='height:80%;background:green;display:block;')
+                img(src="data:image/gif;base64,R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==")
+            div.panel(style='height:44px;background:purple;display:block;')
+                div.panel(style='height:40px;width:40px;background:purple;display:block;top=-44px;bottom=0px;')
+                    //a() +
+        div.panel(style='left:0px;right:0px;min-width:250px;min-height:550px;width:15%;')
+        div.panel(style='left:0px;right:0px;min-width:650px;min-height:550px;width:65%;')
+    //iframe(src='/goods/catgory')

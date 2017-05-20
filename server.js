@@ -2,6 +2,7 @@
 var express = require('express'),
     fs      = require('fs'),
     app     = express(),
+    body_parser = require('body-parser'),
     eps     = require('ejs'),
     morgan  = require('morgan');
 
@@ -13,11 +14,15 @@ app.engine('html', require('ejs').renderFile);
 app.engine('pug', require('pug').renderFile);
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(body_parser.json());
+app.use(body_parser.urlencoded({extended: true}));
+
 app.use(morgan('combined'))
 
 require('./common/common')
 
 app.use('/goods', require('./common/goods'));
+app.use('/kendo', require('./kendo/index'))
 
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -65,6 +70,7 @@ var initDb = function(callback) {
     dbDetails.type = 'MongoDB';
 
     global.Common.db = db;
+    global.db = db;
 
     console.log('Connected to MongoDB at: %s', mongoURL);
   });

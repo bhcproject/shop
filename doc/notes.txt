@@ -1,0 +1,67 @@
+开发笔记
+
+05-08
+开始开发
+在w3cschool上学习了CSS、HTML5的基本知识
+http://www.w3school.com.cn
+主页面完成
+
+05-09
+今天需要了解node.js项目如何部署的知识，查到openshift是排名第一的免费node.js app hosting 平台，
+开始学习openshift.
+
+使用openshift web console 建立了第一个应用程序，名字是phoebeshop
+
+05-10
+学习使用GitHub
+GitHub Helloworld https://guides.github.com/activities/hello-world/
+安装Git版本 2.13.0 64bit
+
+05-11
+
+重新创建phoebeshopv2
+webhooks 链接为
+https://api.starter-us-east-1.openshift.com/oapi/v1/namespaces/phoebeshopv2/buildconfigs/nodejs-mongo-persistent/webhooks/GldyUpMV7eKKm6fTTLb3utbNeQtVQDvn8SyWVeGn/github
+
+学习了openshift basic workflow，成功将app设置为自动build.
+
+05-12
+安装MongoDB Compass，用于管理openshift上的MongoDB，结果无法使用，原因是openshift上的mongodb只能在cluster内部访问。
+
+管理mongodb的方法：
+    使用 oc get pods 列出所有的pods
+    使用 oc rsh <pod name> 进入remote shell
+    在 shell中 使用 mongo
+    phoebeshop 的命令为 oc rsh mongodb-1-mb4zr
+    mongo -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE
+
+05-13
+学习mongodb官方文档
+
+05-14
+今天将nodejs-ex使用webstorm直接提交github，但是使用webstorm本地调试的时候，出现can't find module express的错误。
+为了进行本地调试，需要将本地的nodejs运行环境设置成与openshift一样。
+使用 npm install -g express 全局安装express module
+在WebStorm/Run/Edit Configerations中设置环境变量 NODE_PATH=C:\Users\Chang\AppData\Roaming\npm\node_modules
+另外设置NODE_DEBUG=module环境变量可以开启module的内部调试信息。
+
+05-15
+今天出现了重大问题，openshift上的应用一直无法部署，10分钟超时后app不ready。
+重新建立应用
+
+05-16
+今天一切顺利，使用pug代替了jade
+加入了goods module，现在需要学习web frontend 技术做出动态页面来方便的编辑管理商品。
+
+05-17
+这篇文章介绍了5个好用的web ui 设计工具
+http://www.25xt.com/webapp/5725.html
+
+今天开始使用kendo，下载的本地版本不好用，使用CDN版本就能work
+kendo 文档：http://docs.telerik.com/kendo-ui/intro/installation/cdn-service
+kendo-ui-core 源码： https://github.com/telerik/kendo-ui-core （可以查看免费版本包含的组件）
+kendo-ui 控件列表 http://docs.telerik.com/kendo-ui/intro/supporting/list-of-widgets
+kendo-ui icon 列表: http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web#list-of-font-icons
+
+moqups功能看起来很强大，但是不知道怎样将网页保存下来。
+UI Parde可以用来设计窗体 http://livetools.uiparade.com/index.html

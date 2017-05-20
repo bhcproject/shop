@@ -21,6 +21,18 @@ div.window
     align-items: center;
 }
 
+div.leftwindow
+{
+    width: 100%;
+    height: 100%;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left: auto;
+    margin-right: auto;
+    background: red;
+    align-items: left;
+}
+
 div.icon
 {
     display: inline-block;
@@ -50,4 +62,16 @@ div.icon_text
     font-size:18px;
     margin: 10px 5px;
     color: white;
+}
+
+div.panel
+{
+    background: #dddddd;
+    border: 2px solid #ff1810;
+    display: inline-block;
+    width: auto;
+    height: 96%;
+    margin: 4px;
+    padding: 0px;
+    text-align: center;
 }
